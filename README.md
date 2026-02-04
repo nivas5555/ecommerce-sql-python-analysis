@@ -8,17 +8,17 @@ This project demonstrates a **real-world, production-style workflow** where Pyth
 
 ## 📌 Project Overview
 
-- **Python** → Data loading, validation, and format conversion  
+- **Python** → Data loading, validation, format conversion, and visualization  
 - **MySQL** → Scalable querying, joins, aggregations, and window functions  
 
 The dataset was originally provided in **Excel format**.  
-Python was used to convert and prepare the data into clean CSV files for efficient database ingestion.
+Python was used to convert and prepare the data into clean CSV files for efficient database ingestion and downstream analytics.
 
 ---
 
 ## ⚙️ Tools & Technologies
 
-- Python (Pandas, NumPy)
+- Python (Pandas, NumPy, Matplotlib, Seaborn)
 - Jupyter Notebook
 - MySQL / MySQL Workbench
 - SQL (Joins, CTEs, Window Functions)
@@ -27,50 +27,55 @@ Python was used to convert and prepare the data into clean CSV files for efficie
 ---
 
 ## 📂 Repository Structure
-ecommerce-sql-python-analysis/
-│
-├── data/ # Raw datasets (Excel / CSV)
-├── output/ # Cleaned CSV files for SQL ingestion
-├── notebooks/ # Python data preparation notebook
-├── ecommerce_sql_analysis.sql
-└── README.md
+data/ Raw ecommerce datasets
+output/ SQL-derived analytical output tables
+notebooks/ Python notebooks for data preparation and visualization
+README.md End-to-end Python + SQL analytics workflow documentation
+ecommerce_sql_analysis.sql Complete SQL analysis queries for ecommerce business insights
+
+
+This structure is designed to be **clear, reproducible, and recruiter-friendly**, mirroring how analytics projects are organized in real production environments.
 
 ---
 
-## 🧠 Why Python + SQL?
+## Why Python + SQL?
 
-Python is excellent for:
+**Python** is excellent for:
 - Reading Excel files
 - Data validation
 - File format conversion
-- Automation
+- Automation and visualization
 
-SQL is ideal for:
+**SQL** is ideal for:
 - Large-scale querying
 - Business analytics
 - Aggregations and window functions
-- Performance on big datasets
+- Performance on large datasets
+
+Using both together reflects **industry-standard analytics workflows**.
 
 ---
 
-## 🚀 Data Ingestion Strategy
+## Data Ingestion Strategy
 
 ### Python-based ingestion (Demonstrated)
-- Python code shows how data **can** be loaded into MySQL using `LOAD DATA LOCAL INFILE`
-- Included for **learning and completeness**
+- The notebook demonstrates how data **can be loaded into MySQL using Python**
+- Included for **learning, transparency, and completeness**
 
 ### Final approach used in this project
 - **MySQL `LOAD DATA INFILE` via MySQL Workbench**
 - Chosen because:
-  - Faster for large datasets
-  - More reliable
-  - Industry-standard practice
+  - Faster ingestion for large datasets
+  - More reliable for bulk loading
+  - Widely used in real-world data engineering workflows
 
-This decision is clearly documented in the notebook.
+This decision and trade-off are clearly documented in the notebook.
 
 ---
 
-## 📊 Analysis Performed (SQL)
+## Analysis Performed (SQL)
+
+The following business analyses were performed entirely in SQL:
 
 - Revenue trends (monthly & yearly)
 - Seller performance ranking
@@ -79,35 +84,53 @@ This decision is clearly documented in the notebook.
 - Year-over-Year growth
 - Top customers by yearly spend
 
-All analytics queries are available in:
+All analytical queries are available in:
 ecommerce_sql_analysis.sql
 
 ---
 
-## 📓 Python Notebook
+## Python Visual Analysis (Post-SQL)
 
-Notebook focuses on:
-- OS-independent file handling
-- Dataset loading
-- Data validation
-- CSV generation for SQL ingestion
-- Documentation of ingestion decisions
+Python is used for **visual storytelling and executive-level validation** of SQL insights, including:
 
-File:
-notebooks/01_data_preparation_python.ipynb
+- Monthly revenue trend
+- Yearly revenue summary (executive view)
+- Order value distribution
+- Top customers by total order value
+- Product price vs purchase frequency
+
+All heavy analytics are performed in SQL; Python is used strictly for **communication and visualization**.
 
 ---
 
-## ✅ Key Takeaway
+## Python Notebooks
+
+The notebooks focus on:
+- OS-independent file handling
+- Dataset loading and validation
+- CSV generation for SQL ingestion
+- Visualization of SQL outputs
+- Clear documentation of design decisions
+
+Key notebooks:
+- `01_data_preparation_python.ipynb`
+- `02_visual_analysis_post_sql.ipynb`
+
+---
+
+## Key Takeaway
 
 This project mirrors **real-world data workflows**:
-- Python for preparation
-- SQL for analytics
-- Clear trade-offs explained
-- Reproducible and recruiter-friendly structure
+
+- Python for preparation and visualization  
+- SQL for analytics and business logic  
+- Clear trade-offs explained  
+- Clean, modular, and recruiter-friendly structure  
 
 ---
 
 ## 👤 Author
 
 **Nivas Kumar**
+
+
