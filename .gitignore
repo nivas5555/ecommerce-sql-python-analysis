@@ -1,1 +1,13 @@
-notepad .gitignore
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment / secrets
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
