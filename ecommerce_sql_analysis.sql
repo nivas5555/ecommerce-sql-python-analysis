@@ -6,6 +6,89 @@
    Purpose: SQL queries used for analysis & validation
    ===================================================== */
 
+/* ======================================================
+DATA INGESTION STRATEGY
+--------------------------------------------------------
+All datasets were bulk-loaded into MySQL using LOAD DATA INFILE for better performance and scalability.
+This approach is commonly used in production environments for ingesting large CSV files efficiently.
+====================================================== */
+
+/* Verify MySQL secure file directory
+   ------------------------------------------
+   MySQL allows LOAD DATA INFILE only from the directory specified by the secure_file_priv variable.
+   All CSV files must be placed inside this directory.
+*/
+SHOW VARIABLES LIKE 'secure_file_priv';
+
+/* Verify LOCAL INFILE configuration
+   -----------------------------------------
+   Ensure that local_infile is enabled on the server.
+   This allows bulk data loading from CSV files.
+*/
+SHOW VARIABLES LIKE 'local_infile';
+
+/* Bulk load CSV files into tables
+   ---------------------------------------
+   After confirming the above settings and placing the CSV files in the allowed directory, execute the LOAD DATA INFILE statements to ingest the data.
+*/
+
+-- Customers dataset
+LOAD DATA INFILE 'customers.csv'
+INTO TABLE customers
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Sellers
+LOAD DATA INFILE 'sellers.csv'
+INTO TABLE sellers
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Orders
+LOAD DATA INFILE 'orders.csv'
+INTO TABLE orders
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Order Items
+LOAD DATA INFILE 'order_items.csv'
+INTO TABLE order_items
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Payments
+LOAD DATA INFILE 'payments.csv'
+INTO TABLE payments
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Products
+LOAD DATA INFILE 'products.csv'
+INTO TABLE products
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Geolocation
+LOAD DATA INFILE 'geolocation.csv'
+INTO TABLE geolocation
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
 /* =====================================================
    SECTION 1: DATA UNDERSTANDING & BASIC CHECKS
    ===================================================== */
@@ -429,3 +512,32 @@ WHERE spend_rank <= 3
 ORDER BY
     sales_year,
     spend_rank;
+SELECT
+    o.order_id,
+    o.customer_id,
+    SUM(oi.price + oi.freight_value) AS order_value
+FROM orders o
+JOIN order_items oi
+    ON o.order_id = oi.order_id
+GROUP BY
+    o.order_id,
+    o.customer_id;
+
+-- --------------------------------------------------------------------------
+SELECT 
+    YEAR(o.order_purchase_timestamp) AS order_year,
+    ROUND(SUM(p.payment_value), 2) AS total_revenue
+FROM orders o
+JOIN order_payments p
+    ON o.order_id = p.order_id
+GROUP BY YEAR(o.order_purchase_timestamp)
+ORDER BY order_year;
+
+
+
+
+
+
+
+
+
